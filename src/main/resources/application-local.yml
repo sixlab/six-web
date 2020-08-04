@@ -1,0 +1,27 @@
+server:
+  port: 8888
+spring:
+  freemarker:
+    cache: false
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/minesite?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: root
+    password: YvrnbfRTMXY0YCaVtjef6q2vTwM4sSJg4IyBMiap1Sw37KMuBiSnOpB5bNnt6RxFkWjzV27ZEOuyxn5A6zAZCg==
+
+logging:
+  config: classpath:logback-console.xml
+
+minesite:
+  admin:
+    prefix: "admin-"
+  druid:
+    key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJbxUycCJKNFJjcGtb+2uzlqzVpZyXGbS7atTSFHVVVJWmUf8F9rakYg0Y2iQhNgVC1k8OE+ZTeU1TfepLsFpvkCAwEAAQ==
+    username: root
+    password: password
+  login:
+    seconds: 3600
+    sign: dksk24k30xk
+  dingtalk:
+    token: 1
+  telegram:
+    key: 2

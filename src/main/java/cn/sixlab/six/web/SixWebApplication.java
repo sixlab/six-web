@@ -1,0 +1,17 @@
+package cn.sixlab.six.web;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+@EnableCaching
+@EnableScheduling
+@SpringBootApplication
+public class SixWebApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SixWebApplication.class, args);
+    }
+
+}
