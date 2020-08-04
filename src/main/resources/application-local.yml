@@ -4,7 +4,7 @@ spring:
   freemarker:
     cache: false
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/minesite?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://127.0.0.1:3306/sixlab?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&allowMultiQueries=true
     username: root
     password: YvrnbfRTMXY0YCaVtjef6q2vTwM4sSJg4IyBMiap1Sw37KMuBiSnOpB5bNnt6RxFkWjzV27ZEOuyxn5A6zAZCg==
 
@@ -12,6 +12,7 @@ logging:
   config: classpath:logback-console.xml
 
 minesite:
+  version: 1
   admin:
     prefix: "admin-"
   druid:
