@@ -12,7 +12,8 @@ logging:
   config: classpath:logback-console.xml
 
 minesite:
-  version: 1
+  version:
+    app: 1
   admin:
     prefix: "admin-"
   druid:
