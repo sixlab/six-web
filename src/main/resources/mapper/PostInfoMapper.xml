@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sixlab.six.web.mapper.PostInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.sixlab.six.web.models.PostInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="author_id" jdbcType="INTEGER" property="authorId" />
+    <result column="author_name" jdbcType="VARCHAR" property="authorName" />
+    <result column="post_type" jdbcType="VARCHAR" property="postType" />
+    <result column="post_title" jdbcType="VARCHAR" property="postTitle" />
+    <result column="post_summary" jdbcType="VARCHAR" property="postSummary" />
+    <result column="post_status" jdbcType="VARCHAR" property="postStatus" />
+    <result column="comment_status" jdbcType="VARCHAR" property="commentStatus" />
+    <result column="comment_count" jdbcType="INTEGER" property="commentCount" />
+    <result column="post_date" jdbcType="TIMESTAMP" property="postDate" />
+    <result column="post_modified" jdbcType="TIMESTAMP" property="postModified" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.sixlab.six.web.models.PostInfo">
+    <result column="post_content" jdbcType="LONGVARCHAR" property="postContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, author_id, author_name, post_type, post_title, post_summary, post_status, comment_status, 
+    comment_count, post_date, post_modified, create_time
+  </sql>
+  <sql id="Blob_Column_List">
+    post_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from post_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from post_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.sixlab.six.web.models.PostInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into post_info (author_id, author_name, post_type, 
+      post_title, post_summary, post_status, 
+      comment_status, comment_count, post_date, 
+      post_modified, create_time, post_content
+      )
+    values (#{authorId,jdbcType=INTEGER}, #{authorName,jdbcType=VARCHAR}, #{postType,jdbcType=VARCHAR}, 
+      #{postTitle,jdbcType=VARCHAR}, #{postSummary,jdbcType=VARCHAR}, #{postStatus,jdbcType=VARCHAR}, 
+      #{commentStatus,jdbcType=VARCHAR}, #{commentCount,jdbcType=INTEGER}, #{postDate,jdbcType=TIMESTAMP}, 
+      #{postModified,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{postContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sixlab.six.web.models.PostInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into post_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="authorId != null">
+        author_id,
+      </if>
+      <if test="authorName != null">
+        author_name,
+      </if>
+      <if test="postType != null">
+        post_type,
+      </if>
+      <if test="postTitle != null">
+        post_title,
+      </if>
+      <if test="postSummary != null">
+        post_summary,
+      </if>
+      <if test="postStatus != null">
+        post_status,
+      </if>
+      <if test="commentStatus != null">
+        comment_status,
+      </if>
+      <if test="commentCount != null">
+        comment_count,
+      </if>
+      <if test="postDate != null">
+        post_date,
+      </if>
+      <if test="postModified != null">
+        post_modified,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="postContent != null">
+        post_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="authorId != null">
+        #{authorId,jdbcType=INTEGER},
+      </if>
+      <if test="authorName != null">
+        #{authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="postType != null">
+        #{postType,jdbcType=VARCHAR},
+      </if>
+      <if test="postTitle != null">
+        #{postTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="postSummary != null">
+        #{postSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="postStatus != null">
+        #{postStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="commentStatus != null">
+        #{commentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="commentCount != null">
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="postDate != null">
+        #{postDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postModified != null">
+        #{postModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postContent != null">
+        #{postContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sixlab.six.web.models.PostInfo">
+    update post_info
+    <set>
+      <if test="authorId != null">
+        author_id = #{authorId,jdbcType=INTEGER},
+      </if>
+      <if test="authorName != null">
+        author_name = #{authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="postType != null">
+        post_type = #{postType,jdbcType=VARCHAR},
+      </if>
+      <if test="postTitle != null">
+        post_title = #{postTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="postSummary != null">
+        post_summary = #{postSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="postStatus != null">
+        post_status = #{postStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="commentStatus != null">
+        comment_status = #{commentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="commentCount != null">
+        comment_count = #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="postDate != null">
+        post_date = #{postDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postModified != null">
+        post_modified = #{postModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postContent != null">
+        post_content = #{postContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sixlab.six.web.models.PostInfo">
+    update post_info
+    set author_id = #{authorId,jdbcType=INTEGER},
+      author_name = #{authorName,jdbcType=VARCHAR},
+      post_type = #{postType,jdbcType=VARCHAR},
+      post_title = #{postTitle,jdbcType=VARCHAR},
+      post_summary = #{postSummary,jdbcType=VARCHAR},
+      post_status = #{postStatus,jdbcType=VARCHAR},
+      comment_status = #{commentStatus,jdbcType=VARCHAR},
+      comment_count = #{commentCount,jdbcType=INTEGER},
+      post_date = #{postDate,jdbcType=TIMESTAMP},
+      post_modified = #{postModified,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      post_content = #{postContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sixlab.six.web.models.PostInfo">
+    update post_info
+    set author_id = #{authorId,jdbcType=INTEGER},
+      author_name = #{authorName,jdbcType=VARCHAR},
+      post_type = #{postType,jdbcType=VARCHAR},
+      post_title = #{postTitle,jdbcType=VARCHAR},
+      post_summary = #{postSummary,jdbcType=VARCHAR},
+      post_status = #{postStatus,jdbcType=VARCHAR},
+      comment_status = #{commentStatus,jdbcType=VARCHAR},
+      comment_count = #{commentCount,jdbcType=INTEGER},
+      post_date = #{postDate,jdbcType=TIMESTAMP},
+      post_modified = #{postModified,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
