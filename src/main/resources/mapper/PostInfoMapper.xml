@@ -3,6 +3,7 @@
 <mapper namespace="cn.sixlab.six.web.mapper.PostInfoMapper">
   <resultMap id="BaseResultMap" type="cn.sixlab.six.web.models.PostInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="alias_name" jdbcType="VARCHAR" property="aliasName" />
     <result column="author_id" jdbcType="INTEGER" property="authorId" />
     <result column="author_name" jdbcType="VARCHAR" property="authorName" />
     <result column="post_type" jdbcType="VARCHAR" property="postType" />
@@ -19,8 +20,8 @@
     <result column="post_content" jdbcType="LONGVARCHAR" property="postContent" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, author_id, author_name, post_type, post_title, post_summary, post_status, comment_status, 
-    comment_count, post_date, post_modified, create_time
+    id, alias_name, author_id, author_name, post_type, post_title, post_summary, post_status, 
+    comment_status, comment_count, post_date, post_modified, create_time
   </sql>
   <sql id="Blob_Column_List">
     post_content
@@ -41,16 +42,16 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into post_info (author_id, author_name, post_type, 
-      post_title, post_summary, post_status, 
-      comment_status, comment_count, post_date, 
-      post_modified, create_time, post_content
-      )
-    values (#{authorId,jdbcType=INTEGER}, #{authorName,jdbcType=VARCHAR}, #{postType,jdbcType=VARCHAR}, 
-      #{postTitle,jdbcType=VARCHAR}, #{postSummary,jdbcType=VARCHAR}, #{postStatus,jdbcType=VARCHAR}, 
-      #{commentStatus,jdbcType=VARCHAR}, #{commentCount,jdbcType=INTEGER}, #{postDate,jdbcType=TIMESTAMP}, 
-      #{postModified,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{postContent,jdbcType=LONGVARCHAR}
-      )
+    insert into post_info (alias_name, author_id, author_name, 
+      post_type, post_title, post_summary, 
+      post_status, comment_status, comment_count, 
+      post_date, post_modified, create_time, 
+      post_content)
+    values (#{aliasName,jdbcType=VARCHAR}, #{authorId,jdbcType=INTEGER}, #{authorName,jdbcType=VARCHAR}, 
+      #{postType,jdbcType=VARCHAR}, #{postTitle,jdbcType=VARCHAR}, #{postSummary,jdbcType=VARCHAR}, 
+      #{postStatus,jdbcType=VARCHAR}, #{commentStatus,jdbcType=VARCHAR}, #{commentCount,jdbcType=INTEGER}, 
+      #{postDate,jdbcType=TIMESTAMP}, #{postModified,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{postContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.sixlab.six.web.models.PostInfo">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -58,6 +59,9 @@
     </selectKey>
     insert into post_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aliasName != null">
+        alias_name,
+      </if>
       <if test="authorId != null">
         author_id,
       </if>
@@ -96,6 +100,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aliasName != null">
+        #{aliasName,jdbcType=VARCHAR},
+      </if>
       <if test="authorId != null">
         #{authorId,jdbcType=INTEGER},
       </if>
@@ -137,6 +144,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.sixlab.six.web.models.PostInfo">
     update post_info
     <set>
+      <if test="aliasName != null">
+        alias_name = #{aliasName,jdbcType=VARCHAR},
+      </if>
       <if test="authorId != null">
         author_id = #{authorId,jdbcType=INTEGER},
       </if>
@@ -178,7 +188,8 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.sixlab.six.web.models.PostInfo">
     update post_info
-    set author_id = #{authorId,jdbcType=INTEGER},
+    set alias_name = #{aliasName,jdbcType=VARCHAR},
+      author_id = #{authorId,jdbcType=INTEGER},
       author_name = #{authorName,jdbcType=VARCHAR},
       post_type = #{postType,jdbcType=VARCHAR},
       post_title = #{postTitle,jdbcType=VARCHAR},
@@ -194,7 +205,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.sixlab.six.web.models.PostInfo">
     update post_info
-    set author_id = #{authorId,jdbcType=INTEGER},
+    set alias_name = #{aliasName,jdbcType=VARCHAR},
+      author_id = #{authorId,jdbcType=INTEGER},
       author_name = #{authorName,jdbcType=VARCHAR},
       post_type = #{postType,jdbcType=VARCHAR},
       post_title = #{postTitle,jdbcType=VARCHAR},

@@ -16,7 +16,7 @@ public class FreemarkerConfig {
         configuration.setSharedVariable("FrameInfo", infoDirective);
 
         List<String> includes = new ArrayList<>();
-        includes.add("frame/index.ftlh");
+        includes.add("frame/index.ftl");
 
         configuration.setAutoIncludes(includes);
     }

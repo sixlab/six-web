@@ -23,8 +23,6 @@ public class SixTableTools {
     @Test
     void contextLoads() throws Exception {
         String[] tables = new String[]{
-                "post_attr",
-                "post_attr_relate",
                 "post_info",
         };
 

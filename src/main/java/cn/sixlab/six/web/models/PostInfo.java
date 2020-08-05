@@ -6,6 +6,8 @@ import java.util.Date;
 public class PostInfo implements Serializable {
     private Integer id;
 
+    private String aliasName;
+
     private Integer authorId;
 
     private String authorName;
@@ -38,6 +40,14 @@ public class PostInfo implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getAliasName() {
+        return aliasName;
+    }
+
+    public void setAliasName(String aliasName) {
+        this.aliasName = aliasName == null ? null : aliasName.trim();
     }
 
     public Integer getAuthorId() {

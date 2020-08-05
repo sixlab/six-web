@@ -22,13 +22,10 @@ create table if not exists six_notify_config
     create_time datetime(6) null
 ) comment 'notify';
 
-create index six_notify_config_code_index on six_notify_config (code);
-
-create index six_notify_config_type_index on six_notify_config (type);
-
 create table if not exists post_info
 (
     id int auto_increment primary key,
+    alias_name varchar(20) null,
     author_id int null,
     author_name varchar(50) null,
     post_type varchar(20) null,
@@ -42,6 +39,10 @@ create table if not exists post_info
     post_modified datetime null,
     create_time datetime null
 ) comment '文章信息表';
+
+create index six_notify_config_code_index on six_notify_config (code);
+
+create index six_notify_config_type_index on six_notify_config (type);
 create index post_info_author_id_index on post_info (author_id);
 create index post_info_post_type_index on post_info (post_type);
 create index post_info_post_status_index on post_info (post_status);
