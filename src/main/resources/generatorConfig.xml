@@ -17,7 +17,7 @@
 
         <!--数据库链接URL，用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/minesite?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;allowPublicKeyRetrieval=true"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/sixlab?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;allowPublicKeyRetrieval=true"
                         userId="root" password="qwe123">
         </jdbcConnection>
         <javaTypeResolver>

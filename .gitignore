@@ -101,7 +101,6 @@ gen
 .Trash-*
 .nfs*
 docs/_book
-test/
 Thumbs.db
 Thumbs.db:encryptable
 ehthumbs.db

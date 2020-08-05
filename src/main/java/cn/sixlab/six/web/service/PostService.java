@@ -3,10 +3,9 @@ package cn.sixlab.six.web.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SixService {
+public class PostService {
 
-    public void init() {
+    public void getPost(String postId) {
 
     }
-
 }
