@@ -15,13 +15,17 @@ import java.util.Map;
 public class FrameInfoDirective implements TemplateDirectiveModel {
 
     @Autowired
+    public void setSharedVariable(Configuration configuration) {
+        configuration.setSharedVariable("FrameInfo", this);
+    }
+
+    @Autowired
     private SiteService siteService;
 
     @Override
     public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body) throws TemplateException, IOException {
         //获取网站配置信息,
         Map<String,String> siteMap = siteService.siteInfo();
-
 
         //将网站配置信息添加到全局变量
         env.setVariable("siteInfo",new BeansWrapperBuilder(Configuration.VERSION_2_3_29).build().wrap(siteMap));

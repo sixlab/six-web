@@ -4,6 +4,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.mybatis.generator.api.ShellRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,9 +22,14 @@ public class SixTableTools {
             "        </table>";
 
     @Test
+    void pwd(){
+        System.out.println(new BCryptPasswordEncoder().encode("qwe123"));
+    }
+
+    @Test
     void contextLoads() throws Exception {
         String[] tables = new String[]{
-                "post_info",
+                "post_attr",
         };
 
         // 获取到原始generatorConfig

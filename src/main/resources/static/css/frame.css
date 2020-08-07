@@ -1,0 +1,33 @@
+header nav {
+  background-color: #222;
+}
+header .navbar {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+header .navbar .dropdown-item:hover {
+  background-color: #eee !important;
+}
+header .navbar .nav-item .nav-link {
+  color: #fff;
+}
+header .navbar .nav-item .nav-link:hover {
+  background-color: #2e363b;
+}
+.dropdown-menu {
+  margin-top: 0;
+}
+main {
+  min-height: 600px;
+}
+main > .container {
+  padding: 60px 15px 0;
+}
+footer {
+  background-color: #f5f5f5;
+}
+footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+/*# sourceMappingURL=frame.css.map */

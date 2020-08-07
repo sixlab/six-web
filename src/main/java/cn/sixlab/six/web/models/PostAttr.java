@@ -6,6 +6,8 @@ import java.util.Date;
 public class PostAttr implements Serializable {
     private Integer id;
 
+    private String attrCode;
+
     private String attrType;
 
     private String attrName;
@@ -22,6 +24,14 @@ public class PostAttr implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getAttrCode() {
+        return attrCode;
+    }
+
+    public void setAttrCode(String attrCode) {
+        this.attrCode = attrCode == null ? null : attrCode.trim();
     }
 
     public String getAttrType() {

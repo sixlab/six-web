@@ -3,13 +3,14 @@
 <mapper namespace="cn.sixlab.six.web.mapper.PostAttrMapper">
   <resultMap id="BaseResultMap" type="cn.sixlab.six.web.models.PostAttr">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="attr_code" jdbcType="VARCHAR" property="attrCode" />
     <result column="attr_type" jdbcType="VARCHAR" property="attrType" />
     <result column="attr_name" jdbcType="VARCHAR" property="attrName" />
     <result column="attr_summary" jdbcType="VARCHAR" property="attrSummary" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, attr_type, attr_name, attr_summary, create_time
+    id, attr_code, attr_type, attr_name, attr_summary, create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -25,10 +26,10 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into post_attr (attr_type, attr_name, attr_summary, 
-      create_time)
-    values (#{attrType,jdbcType=VARCHAR}, #{attrName,jdbcType=VARCHAR}, #{attrSummary,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP})
+    insert into post_attr (attr_code, attr_type, attr_name, 
+      attr_summary, create_time)
+    values (#{attrCode,jdbcType=VARCHAR}, #{attrType,jdbcType=VARCHAR}, #{attrName,jdbcType=VARCHAR}, 
+      #{attrSummary,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cn.sixlab.six.web.models.PostAttr">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -36,6 +37,9 @@
     </selectKey>
     insert into post_attr
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="attrCode != null">
+        attr_code,
+      </if>
       <if test="attrType != null">
         attr_type,
       </if>
@@ -50,6 +54,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="attrCode != null">
+        #{attrCode,jdbcType=VARCHAR},
+      </if>
       <if test="attrType != null">
         #{attrType,jdbcType=VARCHAR},
       </if>
@@ -67,6 +74,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.sixlab.six.web.models.PostAttr">
     update post_attr
     <set>
+      <if test="attrCode != null">
+        attr_code = #{attrCode,jdbcType=VARCHAR},
+      </if>
       <if test="attrType != null">
         attr_type = #{attrType,jdbcType=VARCHAR},
       </if>
@@ -84,7 +94,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.sixlab.six.web.models.PostAttr">
     update post_attr
-    set attr_type = #{attrType,jdbcType=VARCHAR},
+    set attr_code = #{attrCode,jdbcType=VARCHAR},
+      attr_type = #{attrType,jdbcType=VARCHAR},
       attr_name = #{attrName,jdbcType=VARCHAR},
       attr_summary = #{attrSummary,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}

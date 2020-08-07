@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sixlab.six.web.mapper.SiteMenuMapper">
+  <resultMap id="BaseResultMap" type="cn.sixlab.six.web.models.SiteMenu">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="menu_position" jdbcType="VARCHAR" property="menuPosition" />
+    <result column="menu_level" jdbcType="INTEGER" property="menuLevel" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="menu_path" jdbcType="VARCHAR" property="menuPath" />
+    <result column="menu_summary" jdbcType="VARCHAR" property="menuSummary" />
+    <result column="menu_order" jdbcType="INTEGER" property="menuOrder" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, menu_position, menu_level, menu_name, menu_path, menu_summary, menu_order, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from site_menu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from site_menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.sixlab.six.web.models.SiteMenu">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into site_menu (menu_position, menu_level, menu_name, 
+      menu_path, menu_summary, menu_order, 
+      create_time)
+    values (#{menuPosition,jdbcType=VARCHAR}, #{menuLevel,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, 
+      #{menuPath,jdbcType=VARCHAR}, #{menuSummary,jdbcType=VARCHAR}, #{menuOrder,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sixlab.six.web.models.SiteMenu">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into site_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuPosition != null">
+        menu_position,
+      </if>
+      <if test="menuLevel != null">
+        menu_level,
+      </if>
+      <if test="menuName != null">
+        menu_name,
+      </if>
+      <if test="menuPath != null">
+        menu_path,
+      </if>
+      <if test="menuSummary != null">
+        menu_summary,
+      </if>
+      <if test="menuOrder != null">
+        menu_order,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuPosition != null">
+        #{menuPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="menuLevel != null">
+        #{menuLevel,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPath != null">
+        #{menuPath,jdbcType=VARCHAR},
+      </if>
+      <if test="menuSummary != null">
+        #{menuSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="menuOrder != null">
+        #{menuOrder,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sixlab.six.web.models.SiteMenu">
+    update site_menu
+    <set>
+      <if test="menuPosition != null">
+        menu_position = #{menuPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="menuLevel != null">
+        menu_level = #{menuLevel,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null">
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPath != null">
+        menu_path = #{menuPath,jdbcType=VARCHAR},
+      </if>
+      <if test="menuSummary != null">
+        menu_summary = #{menuSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="menuOrder != null">
+        menu_order = #{menuOrder,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sixlab.six.web.models.SiteMenu">
+    update site_menu
+    set menu_position = #{menuPosition,jdbcType=VARCHAR},
+      menu_level = #{menuLevel,jdbcType=INTEGER},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_path = #{menuPath,jdbcType=VARCHAR},
+      menu_summary = #{menuSummary,jdbcType=VARCHAR},
+      menu_order = #{menuOrder,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+<!--  -->
+
+  <insert id="insertPositionMenu">
+    insert into site_menu (
+      menu_position, menu_level, menu_name,
+      menu_path, menu_summary, menu_order, create_time
+    ) values
+    <foreach collection="menuList" item="item" index="index" separator=",">
+      (
+       #{menuPosition,jdbcType=VARCHAR}, #{item.menuLevel,jdbcType=INTEGER}, #{item.menuName,jdbcType=VARCHAR},
+       #{item.menuPath,jdbcType=VARCHAR}, #{item.menuSummary,jdbcType=VARCHAR}, #{item.menuOrder,jdbcType=INTEGER}, now()
+      )
+    </foreach>
+  </insert>
+</mapper>
