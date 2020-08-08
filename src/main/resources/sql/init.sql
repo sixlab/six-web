@@ -101,6 +101,8 @@ create table if not exists rank_item
     item_hit int null,
     item_change int null comment '变化，1:升，-1:降，0:不变',
     item_intro varchar(1000) null,
+    baike_id varchar(20) null,
+    douban_id varchar(20) null,
     create_time datetime null
 )
     comment '榜单项';

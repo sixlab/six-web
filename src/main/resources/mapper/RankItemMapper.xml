@@ -9,10 +9,13 @@
     <result column="item_hit" jdbcType="INTEGER" property="itemHit" />
     <result column="item_change" jdbcType="INTEGER" property="itemChange" />
     <result column="item_intro" jdbcType="VARCHAR" property="itemIntro" />
+    <result column="baike_id" jdbcType="VARCHAR" property="baikeId" />
+    <result column="douban_id" jdbcType="VARCHAR" property="doubanId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, group_id, item_rank, item_name, item_hit, item_change, item_intro, create_time
+    id, group_id, item_rank, item_name, item_hit, item_change, item_intro, baike_id, 
+    douban_id, create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -30,10 +33,12 @@
     </selectKey>
     insert into rank_item (group_id, item_rank, item_name, 
       item_hit, item_change, item_intro, 
-      create_time)
+      baike_id, douban_id, create_time
+      )
     values (#{groupId,jdbcType=INTEGER}, #{itemRank,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, 
       #{itemHit,jdbcType=INTEGER}, #{itemChange,jdbcType=INTEGER}, #{itemIntro,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP})
+      #{baikeId,jdbcType=VARCHAR}, #{doubanId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.sixlab.six.web.models.RankItem">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -59,6 +64,12 @@
       <if test="itemIntro != null">
         item_intro,
       </if>
+      <if test="baikeId != null">
+        baike_id,
+      </if>
+      <if test="doubanId != null">
+        douban_id,
+      </if>
       <if test="createTime != null">
         create_time,
       </if>
@@ -81,6 +92,12 @@
       </if>
       <if test="itemIntro != null">
         #{itemIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="baikeId != null">
+        #{baikeId,jdbcType=VARCHAR},
+      </if>
+      <if test="doubanId != null">
+        #{doubanId,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -108,6 +125,12 @@
       <if test="itemIntro != null">
         item_intro = #{itemIntro,jdbcType=VARCHAR},
       </if>
+      <if test="baikeId != null">
+        baike_id = #{baikeId,jdbcType=VARCHAR},
+      </if>
+      <if test="doubanId != null">
+        douban_id = #{doubanId,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -122,6 +145,8 @@
       item_hit = #{itemHit,jdbcType=INTEGER},
       item_change = #{itemChange,jdbcType=INTEGER},
       item_intro = #{itemIntro,jdbcType=VARCHAR},
+      baike_id = #{baikeId,jdbcType=VARCHAR},
+      douban_id = #{doubanId,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

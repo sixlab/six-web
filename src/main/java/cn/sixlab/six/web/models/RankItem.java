@@ -18,6 +18,10 @@ public class RankItem implements Serializable {
 
     private String itemIntro;
 
+    private String baikeId;
+
+    private String doubanId;
+
     private Date createTime;
 
     private static final long serialVersionUID = 1L;
@@ -76,6 +80,22 @@ public class RankItem implements Serializable {
 
     public void setItemIntro(String itemIntro) {
         this.itemIntro = itemIntro == null ? null : itemIntro.trim();
+    }
+
+    public String getBaikeId() {
+        return baikeId;
+    }
+
+    public void setBaikeId(String baikeId) {
+        this.baikeId = baikeId == null ? null : baikeId.trim();
+    }
+
+    public String getDoubanId() {
+        return doubanId;
+    }
+
+    public void setDoubanId(String doubanId) {
+        this.doubanId = doubanId == null ? null : doubanId.trim();
     }
 
     public Date getCreateTime() {
