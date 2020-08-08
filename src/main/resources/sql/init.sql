@@ -1,4 +1,7 @@
-create table sixlab.post_attr
+# create table sixlab
+# create table if not exists
+
+create table if not exists post_attr
 (
     id int auto_increment
         primary key,
@@ -11,12 +14,12 @@ create table sixlab.post_attr
     comment '文章属性表';
 
 create index post_attr_attr_code_index
-    on sixlab.post_attr (attr_code);
+    on post_attr (attr_code);
 
 create index post_attr_attr_type_index
-    on sixlab.post_attr (attr_type);
+    on post_attr (attr_type);
 
-create table sixlab.post_attr_relate
+create table if not exists post_attr_relate
 (
     id int auto_increment
         primary key,
@@ -27,15 +30,15 @@ create table sixlab.post_attr_relate
     comment 'post 和 属性的关联关系';
 
 create index post_attr_relate_attr_id_index
-    on sixlab.post_attr_relate (attr_id);
+    on post_attr_relate (attr_id);
 
 create index post_attr_relate_post_id_attr_id_index
-    on sixlab.post_attr_relate (post_id, attr_id);
+    on post_attr_relate (post_id, attr_id);
 
 create index post_attr_relate_post_id_index
-    on sixlab.post_attr_relate (post_id);
+    on post_attr_relate (post_id);
 
-create table sixlab.post_info
+create table if not exists post_info
 (
     id int auto_increment
         primary key,
@@ -56,18 +59,59 @@ create table sixlab.post_info
     comment '文章信息表';
 
 create index post_info_author_id_index
-    on sixlab.post_info (author_id);
+    on post_info (author_id);
 
 create index post_info_post_status_index
-    on sixlab.post_info (post_status);
+    on post_info (post_status);
 
 create index post_info_post_type_index
-    on sixlab.post_info (post_type);
+    on post_info (post_type);
 
 create index post_info_post_type_post_status_index
-    on sixlab.post_info (post_type, post_status);
+    on post_info (post_type, post_status);
 
-create table sixlab.site_menu
+create table if not exists rank_group
+(
+    id int auto_increment
+        primary key,
+    parent_id int null,
+    group_name varchar(20) null,
+    group_level int null,
+    group_order int null,
+    create_time datetime null
+)
+    comment '榜单组';
+
+create index rank_group_group_level_index
+    on rank_group (group_level);
+
+create index rank_group_group_order_index
+    on rank_group (group_order);
+
+create index rank_group_parent_id_index
+    on rank_group (parent_id);
+
+create table if not exists rank_item
+(
+    id int auto_increment
+        primary key,
+    group_id int null,
+    item_rank int null,
+    item_name varchar(50) null,
+    item_hit int null,
+    item_change int null comment '变化，1:升，-1:降，0:不变',
+    item_intro varchar(1000) null,
+    create_time datetime null
+)
+    comment '榜单项';
+
+create index rank_item_group_id_index
+    on rank_item (group_id);
+
+create index rank_item_group_id_item_rank_index
+    on rank_item (group_id, item_rank);
+
+create table if not exists site_menu
 (
     id int auto_increment
         primary key,
@@ -82,9 +126,9 @@ create table sixlab.site_menu
     comment '站点菜单';
 
 create index site_menu_menu_position_index
-    on sixlab.site_menu (menu_position);
+    on site_menu (menu_position);
 
-create table sixlab.six_data
+create table if not exists six_data
 (
     id int auto_increment
         primary key,
@@ -97,9 +141,9 @@ create table sixlab.six_data
     comment '数据';
 
 create index six_data_code_index
-    on sixlab.six_data (code);
+    on six_data (code);
 
-create table sixlab.six_notify_config
+create table if not exists six_notify_config
 (
     id int auto_increment
         primary key,
@@ -112,8 +156,8 @@ create table sixlab.six_notify_config
     comment 'notify';
 
 create index six_notify_config_code_index
-    on sixlab.six_notify_config (code);
+    on six_notify_config (code);
 
 create index six_notify_config_type_index
-    on sixlab.six_notify_config (type);
+    on six_notify_config (type);
 

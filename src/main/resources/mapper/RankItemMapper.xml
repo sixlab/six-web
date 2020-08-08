@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sixlab.six.web.mapper.RankItemMapper">
+  <resultMap id="BaseResultMap" type="cn.sixlab.six.web.models.RankItem">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="item_rank" jdbcType="INTEGER" property="itemRank" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="item_hit" jdbcType="INTEGER" property="itemHit" />
+    <result column="item_change" jdbcType="INTEGER" property="itemChange" />
+    <result column="item_intro" jdbcType="VARCHAR" property="itemIntro" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, group_id, item_rank, item_name, item_hit, item_change, item_intro, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rank_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rank_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.sixlab.six.web.models.RankItem">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into rank_item (group_id, item_rank, item_name, 
+      item_hit, item_change, item_intro, 
+      create_time)
+    values (#{groupId,jdbcType=INTEGER}, #{itemRank,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, 
+      #{itemHit,jdbcType=INTEGER}, #{itemChange,jdbcType=INTEGER}, #{itemIntro,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sixlab.six.web.models.RankItem">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into rank_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="itemRank != null">
+        item_rank,
+      </if>
+      <if test="itemName != null">
+        item_name,
+      </if>
+      <if test="itemHit != null">
+        item_hit,
+      </if>
+      <if test="itemChange != null">
+        item_change,
+      </if>
+      <if test="itemIntro != null">
+        item_intro,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="itemRank != null">
+        #{itemRank,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null">
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemHit != null">
+        #{itemHit,jdbcType=INTEGER},
+      </if>
+      <if test="itemChange != null">
+        #{itemChange,jdbcType=INTEGER},
+      </if>
+      <if test="itemIntro != null">
+        #{itemIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sixlab.six.web.models.RankItem">
+    update rank_item
+    <set>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="itemRank != null">
+        item_rank = #{itemRank,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null">
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemHit != null">
+        item_hit = #{itemHit,jdbcType=INTEGER},
+      </if>
+      <if test="itemChange != null">
+        item_change = #{itemChange,jdbcType=INTEGER},
+      </if>
+      <if test="itemIntro != null">
+        item_intro = #{itemIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sixlab.six.web.models.RankItem">
+    update rank_item
+    set group_id = #{groupId,jdbcType=INTEGER},
+      item_rank = #{itemRank,jdbcType=INTEGER},
+      item_name = #{itemName,jdbcType=VARCHAR},
+      item_hit = #{itemHit,jdbcType=INTEGER},
+      item_change = #{itemChange,jdbcType=INTEGER},
+      item_intro = #{itemIntro,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
