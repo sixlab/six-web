@@ -1,6 +1,9 @@
 package cn.sixlab.six.web.mapper;
 
 import cn.sixlab.six.web.models.RankGroup;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 public interface RankGroupMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,10 @@ public interface RankGroupMapper {
     int updateByPrimaryKeySelective(RankGroup record);
 
     int updateByPrimaryKey(RankGroup record);
+
+    @Select(" select *" +
+            " from rank_group " +
+            " order by group_order ")
+    List<RankGroup> selectAll();
+
 }

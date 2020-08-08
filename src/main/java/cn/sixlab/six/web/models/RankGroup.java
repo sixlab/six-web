@@ -8,11 +8,17 @@ public class RankGroup implements Serializable {
 
     private Integer parentId;
 
+    private String groupType;
+
+    private String groupCode;
+
     private String groupName;
 
     private Integer groupLevel;
 
     private Integer groupOrder;
+
+    private String groupLink;
 
     private Date createTime;
 
@@ -32,6 +38,22 @@ public class RankGroup implements Serializable {
 
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
+    }
+
+    public String getGroupType() {
+        return groupType;
+    }
+
+    public void setGroupType(String groupType) {
+        this.groupType = groupType == null ? null : groupType.trim();
+    }
+
+    public String getGroupCode() {
+        return groupCode;
+    }
+
+    public void setGroupCode(String groupCode) {
+        this.groupCode = groupCode == null ? null : groupCode.trim();
     }
 
     public String getGroupName() {
@@ -56,6 +78,14 @@ public class RankGroup implements Serializable {
 
     public void setGroupOrder(Integer groupOrder) {
         this.groupOrder = groupOrder;
+    }
+
+    public String getGroupLink() {
+        return groupLink;
+    }
+
+    public void setGroupLink(String groupLink) {
+        this.groupLink = groupLink == null ? null : groupLink.trim();
     }
 
     public Date getCreateTime() {

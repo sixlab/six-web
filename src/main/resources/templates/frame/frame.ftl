@@ -1,10 +1,11 @@
-<#macro FrameHeader title=''>
+<#macro FrameHeader title='' keywords='' description=''>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <#if title??><title>${title} ${siteInfo.titleSeparator!'-'} ${siteInfo.siteName!'sixlab'}</title><#else><title>${siteInfo.siteName!'sixlab'}</title></#if>
+    <title><#if title??>${title} ${siteInfo.titleSeparator!'-'} </#if>${siteInfo.siteName!''}</title>
+    <meta name="keywords" content="${keywords!''},${siteInfo.keywords!''}" />
+    <meta name="description" content="${siteInfo.description!''}${description!''}" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="/static/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/frame.css">
     <script src="/static/plugins/jquery/jquery.min.js"></script>
@@ -46,16 +47,16 @@
     </@MenuInfo>
 </#macro>
 
-<#macro FrameBody title>
+<#macro FrameBody title="" keywords="" description="">
 <@FrameInfo>
 <!DOCTYPE HTML>
 <html lang='zh-CN'>
-<@FrameHeader title='${title}'/>
+<@FrameHeader title='${title}' keywords='${keywords}' description='${description}'/>
 <body class="d-flex flex-column h-100 body-wrapper">
 <header class="header-wrapper">
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
-        <a class="navbar-brand" href="#">Fixed navbar</a>
+        <a class="navbar-brand" href="#">${siteInfo.siteName}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
