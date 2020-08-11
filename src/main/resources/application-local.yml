@@ -14,8 +14,6 @@ logging:
 minesite:
   version:
     app: 1
-  admin:
-    prefix: "admin-"
   druid:
     key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJbxUycCJKNFJjcGtb+2uzlqzVpZyXGbS7atTSFHVVVJWmUf8F9rakYg0Y2iQhNgVC1k8OE+ZTeU1TfepLsFpvkCAwEAAQ==
     username: root
