@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import tech.minesoft.minesite.core.utils.Err;
-import tech.minesoft.minesite.core.vo.MineException;
+import tech.minesoft.mine.site.core.utils.Err;
+import tech.minesoft.mine.site.core.vo.MineException;
 
 @Controller
 @RequestMapping("/page")

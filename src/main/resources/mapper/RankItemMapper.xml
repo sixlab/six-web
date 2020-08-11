@@ -150,4 +150,21 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+<!--  -->
+
+  <insert id="insertGroup">
+    insert into rank_item (
+      group_id, item_rank, item_name,
+      item_hit, item_change, item_intro,
+      baike_id, douban_id, create_time
+    ) values
+    <foreach collection="dataList" item="item" index="index" separator=",">
+      (
+      #{groupId}, #{item.itemRank}, #{item.itemName},
+      #{item.itemHit}, #{item.itemChange}, #{item.itemIntro},
+      #{item.baikeId}, #{item.doubanId}, now()
+      )
+    </foreach>
+  </insert>
 </mapper>

@@ -8,27 +8,39 @@
         <version>2.3.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>cn.sixlab</groupId>
+    <groupId>cn.sixlab.six.web</groupId>
     <artifactId>six-web</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>six-web</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
-        <mine.version>1.0.4-SNAPSHOT</mine.version>
+        <mine.version>1.0.5-SNAPSHOT</mine.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>tech.minesoft</groupId>
+            <groupId>tech.minesoft.mine.site</groupId>
             <artifactId>minesite-core</artifactId>
             <version>${mine.version}</version>
         </dependency>
         <dependency>
-            <groupId>tech.minesoft</groupId>
+            <groupId>tech.minesoft.mine.site</groupId>
             <artifactId>minesite-ext</artifactId>
             <version>${mine.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tech.minesoft.mine.spider</groupId>
+            <artifactId>spider-core</artifactId>
+            <version>${mine.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.13.1</version>
         </dependency>
 
         <dependency>
@@ -66,6 +78,7 @@
     </dependencies>
 
     <build>
+        <finalName>${artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

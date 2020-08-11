@@ -3,27 +3,41 @@ package cn.sixlab.six.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import tech.minesoft.minesite.core.service.JobService;
+import tech.minesoft.mine.site.core.service.MsJobService;
 
 @Component
 public class JobConfig {
 
     @Autowired
-    private JobService service;
+    private MsJobService service;
 
-    @Scheduled(cron = "0 30 0 * * ? ")
-    public void baiduRankDaily() {
-        service.run("baiduRankDailyService");
+    @Scheduled(cron = "0/10 * * * * ? ")
+    public void test1() {
+        service.run("test1");
+    }
+
+    @Scheduled(cron = "5/10 * * * * ? ")
+    public void test2() {
+        service.run("test2");
     }
 
     @Scheduled(cron = "0 3 7,19 * * ? ")
-    public void daily() {
-        service.run("jdGoldDailyService");
+    public void jdGoldDaily() {
+        service.run("jdGoldDaily");
     }
 
     @Scheduled(cron = "0 0/5 * * * ? ")
-    public void jdPrice() {
-        service.run("jdGoldIntervalService");
+    public void jdGoldInterval() {
+        service.run("jdGoldInterval");
     }
 
+    @Scheduled(cron = "0 5 0 * * ? ")
+    public void baiduRankLink() {
+        service.run("baiduRankLink");
+    }
+
+    @Scheduled(cron = "30 0/1 * * * ? ")
+    public void baiduRankCraw() {
+        service.run("baiduRankCraw");
+    }
 }

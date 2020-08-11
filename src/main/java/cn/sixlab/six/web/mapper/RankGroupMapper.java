@@ -23,4 +23,10 @@ public interface RankGroupMapper {
             " order by group_order ")
     List<RankGroup> selectAll();
 
+    @Select(" select *" +
+            " from rank_group " +
+            " where group_type = 'item' " +
+            " order by group_order ")
+    List<RankGroup> selectItems();
+
 }

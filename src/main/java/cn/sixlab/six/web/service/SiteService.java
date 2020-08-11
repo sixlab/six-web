@@ -2,8 +2,8 @@ package cn.sixlab.six.web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tech.minesoft.minesite.core.mapper.MsMetaMapper;
-import tech.minesoft.minesite.core.models.MsMeta;
+import tech.minesoft.mine.site.core.mapper.MsMetaMapper;
+import tech.minesoft.mine.site.core.models.MsMeta;
 
 import java.util.Calendar;
 import java.util.HashMap;
