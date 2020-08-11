@@ -5,19 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
-
 @Service
 @Transactional
 public class BaiduRankService{
 
     @Autowired
     private BaiduRankSpiderTask task;
-
-    @PostConstruct
-    public void init(){
-        task.spider.linkTask();
-    }
 
 //    @Scheduled(cron = "0 5 0 * * ? ")
     public void link() {

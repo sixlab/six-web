@@ -11,16 +11,6 @@ public class JobConfig {
     @Autowired
     private MsJobService service;
 
-    @Scheduled(cron = "0/10 * * * * ? ")
-    public void test1() {
-        service.run("test1");
-    }
-
-    @Scheduled(cron = "5/10 * * * * ? ")
-    public void test2() {
-        service.run("test2");
-    }
-
     @Scheduled(cron = "0 3 7,19 * * ? ")
     public void jdGoldDaily() {
         service.run("jdGoldDaily");
