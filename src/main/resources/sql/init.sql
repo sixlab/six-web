@@ -116,23 +116,6 @@ create index rank_item_group_id_index
 create index rank_item_group_id_item_rank_index
     on rank_item (group_id, item_rank);
 
-create table if not exists site_menu
-(
-    id int auto_increment
-        primary key,
-    menu_position varchar(20) null,
-    menu_level int null,
-    menu_name varchar(20) null,
-    menu_path varchar(200) null,
-    menu_summary varchar(1000) null,
-    menu_order int null,
-    create_time datetime null
-)
-    comment '站点菜单';
-
-create index site_menu_menu_position_index
-    on site_menu (menu_position);
-
 create table if not exists six_data
 (
     id int auto_increment

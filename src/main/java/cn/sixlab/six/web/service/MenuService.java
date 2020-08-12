@@ -1,9 +1,9 @@
 package cn.sixlab.six.web.service;
 
-import cn.sixlab.six.web.mapper.SiteMenuMapper;
-import cn.sixlab.six.web.models.SiteMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.minesoft.mine.site.core.mapper.MsMenuMapper;
+import tech.minesoft.mine.site.core.models.MsMenu;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ import java.util.List;
 public class MenuService {
 
     @Autowired
-    private SiteMenuMapper menuMapper;
+    private MsMenuMapper menuMapper;
 
-    public List<SiteMenu> positionMenus(String position) {
+    public List<MsMenu> positionMenus(String position) {
         return menuMapper.selectPositionMenu(position);
     }
 

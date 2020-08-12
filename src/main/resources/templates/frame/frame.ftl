@@ -48,7 +48,7 @@
 </#macro>
 
 <#macro FrameBody title="" keywords="" description="">
-<@FrameInfo>
+<@SiteInfo>
 <!DOCTYPE HTML>
 <html lang='zh-CN'>
 <@FrameHeader title='${title}' keywords='${keywords}' description='${description}'/>
@@ -90,5 +90,5 @@
 <#--    <script src="/static/plugins/vue/vue.min.js"></script>-->
 </body>
 </html>
-</@FrameInfo>
+</@SiteInfo>
 </#macro>
