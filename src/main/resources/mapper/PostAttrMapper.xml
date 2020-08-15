@@ -101,4 +101,20 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+<!--  -->
+
+  <select id="selectPostAttr" resultMap="BaseResultMap">
+    select
+      attr_type,
+      group_concat(attr_code) as attr_code,
+      group_concat(attr_name) as attr_name
+    from post_attr
+    where id in
+    <foreach item="item" index="index" collection="relateList" open="("  close=")" separator=",">
+      #{item.attrId}
+    </foreach>
+    group by attr_type
+  </select>
+
 </mapper>

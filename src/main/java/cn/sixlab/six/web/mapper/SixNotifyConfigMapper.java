@@ -23,4 +23,10 @@ public interface SixNotifyConfigMapper {
             " from six_notify_config " +
             " where code = #{code} ")
     List<SixNotifyConfig> queryAllByCode(@Param("code") String code);
+
+    @Select(" select * " +
+            " from six_notify_config " +
+            " order by id ")
+    List<SixNotifyConfig> selectAll();
+
 }

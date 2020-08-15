@@ -1,4 +1,4 @@
-package cn.sixlab.six.web.schedule;
+package cn.sixlab.six.web.service;
 
 import cn.sixlab.six.web.mapper.SixDataMapper;
 import cn.sixlab.six.web.mapper.SixNotifyConfigMapper;
@@ -35,7 +35,6 @@ public class JdGoldService {
     @Autowired
     private DingTalkService dingTalkService;
 
-//    @Scheduled(cron = "0 3 7,19 * * ? ")
     public void daily() {
         String apiUrl = "https://ms.jr.jd.com/gw/generic/hj/h5/m/latestPrice";
 
@@ -65,7 +64,6 @@ public class JdGoldService {
         }
     }
 
-//    @Scheduled(cron = "0 0/5 * * * ? ")
     public void interval() {
         SixData lastData = dataDao.selectFirstByCode(CODE);
 

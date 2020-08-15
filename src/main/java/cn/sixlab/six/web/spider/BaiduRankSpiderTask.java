@@ -21,6 +21,7 @@ import tech.minesoft.mine.spider.core.utils.Content;
 import tech.minesoft.mine.spider.core.vo.SpiderRequest;
 import tech.minesoft.mine.spider.core.vo.SpiderResponse;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,51 +68,62 @@ public class BaiduRankSpiderTask implements SpiderGenerator, SpiderExtractor, Sp
 
     @Override
     public Content extract(SpiderRequest request, SpiderResponse response) {
-        ResultJson json = HttpUtils.responseHandler(response.getResponse());
+        Element tempElement = null;
+        try {
+            ResultJson json = HttpUtils.responseHandler(response.getResponse(), Charset.forName("gb2312"));
 
-        if(json.isSuccess()){
-            List<RankItem> dataList = new ArrayList<>();
+            if(json.isSuccess()){
+                List<RankItem> dataList = new ArrayList<>();
 
-            Document document = Jsoup.parse(json.getMessage());
+                Document document = Jsoup.parse(json.getMessage());
 
-            Elements elements = document.select("table.list-table tr");
+                Elements elements = document.select("table.list-table tr");
 
-            boolean first = true;
-            for (Element element : elements) {
-                if(first){
-                    first = false;
-                    continue;
+                boolean first = true;
+                for (Element element : elements) {
+                    tempElement = element;
+                    if(first){
+                        first = false;
+                        continue;
+                    }
+
+                    if(element.hasClass("item-tr")){
+                        continue;
+                    }
+
+                    RankItem item = new RankItem();
+
+                    if(element.hasClass("hideline")){
+                        Element rankElement = element.select(".num-top").first();
+                        item.setItemRank(Integer.valueOf(rankElement.text()));
+                    }else{
+                        Element rankElement = element.select(".num-normal").first();
+                        item.setItemRank(Integer.valueOf(rankElement.text()));
+                    }
+
+                    Element nameElement = element.select(".list-title").first();
+                    item.setItemName(nameElement.text());
+
+                    Element hitElement = element.select(".last span").first();
+                    item.setItemHit(Integer.valueOf(hitElement.text()));
+
+                    int change = 0;
+                    if(hitElement.hasClass("icon-rise")){
+                        change = 1;
+                    }else if(hitElement.hasClass("icon-fall")){
+                        change = -1;
+                    }
+                    item.setItemChange(change);
+
+                    dataList.add(item);
                 }
 
-                if(element.hasClass("item-tr")){
-                    continue;
-                }
-
-                RankItem item = new RankItem();
-
-                Element rankElement = element.select(".num-top").first();
-                item.setItemRank(Integer.valueOf(rankElement.text()));
-
-                Element nameElement = element.select(".list-title").first();
-                item.setItemName(nameElement.text());
-
-                Element hitElement = element.select(".last span").first();
-                item.setItemHit(Integer.valueOf(hitElement.text()));
-
-                int change = 0;
-                if(hitElement.hasClass("icon-rise")){
-                    change = 1;
-                }else if(hitElement.hasClass("icon-fall")){
-                    change = -1;
-                }
-                item.setItemChange(change);
-
-                dataList.add(item);
+                Content content = new Content(request);
+                content.result.put(KEY_RESULT, dataList);
+                return content;
             }
-
-            Content content = new Content(request);
-            content.result.put(KEY_RESULT, dataList);
-            return content;
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return null;
     }
@@ -123,7 +135,7 @@ public class BaiduRankSpiderTask implements SpiderGenerator, SpiderExtractor, Sp
         Object result = content.result.get(KEY_RESULT);
         if(null!=group && null!=result){
             Integer groupId = (Integer) group;
-            List<RankItem> dataList = (List<RankItem>) request;
+            List<RankItem> dataList = (List<RankItem>) result;
 
             itemMapper.deleteGroup(groupId);
             itemMapper.insertGroup(groupId,dataList);

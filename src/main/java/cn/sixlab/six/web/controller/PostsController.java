@@ -1,6 +1,8 @@
 package cn.sixlab.six.web.controller;
 
+import cn.sixlab.six.web.models.PostAttr;
 import cn.sixlab.six.web.service.PostService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,46 +16,54 @@ public class PostsController {
     @Autowired
     private PostService postService;
 
-    @RequestMapping(value = "/posts/")
+    @RequestMapping(value = "/posts.html")
     public String posts(ModelMap model) {
 
-        return postsPager(model, 1);
+        return attrWithPage(model, "", 1);
     }
 
-    @RequestMapping(value = "/posts/{pageNo}.html")
-    public String postsPager(ModelMap model, @PathVariable("pageNo") Integer pageNo) {
+    @RequestMapping(value = "/posts/{pageNum}.html")
+    public String postsPager(ModelMap model, @PathVariable("pageNum") Integer pageNum) {
 
-        postService.page(pageNo);
-
-        model.put("list", null);
-
-        return "list";
+        return attrWithPage(model, "", pageNum);
     }
 
-    @RequestMapping(value = "/category/{category}/")
+    @RequestMapping(value = "/category/{category}.html")
     public String category(ModelMap model,@PathVariable("category") String category) {
 
-        return categoryPager(model, category,1);
+        return attrWithPage(model, category, 1);
     }
 
-    @RequestMapping(value = "/category/{category}/{pageNo}.html")
-    public String categoryPager(ModelMap model,@PathVariable("category") String category, @PathVariable("pageNo") Integer pageNo) {
+    @RequestMapping(value = "/category/{category}/{pageNum}.html")
+    public String categoryPager(ModelMap model,@PathVariable("category") String category, @PathVariable("pageNum") Integer pageNum) {
 
-
-        return "category";
+        return attrWithPage(model, category, pageNum);
     }
 
-    @RequestMapping(value = "/tag/{tag}/")
+    @RequestMapping(value = "/tag/{tag}.html")
     public String tag(ModelMap model,@PathVariable("tag") String tag) {
 
-        return tagPager(model, tag,1);
+        return attrWithPage(model, tag, 1);
     }
 
-    @RequestMapping(value = "/tag/{tag}/{pageNo}.html")
-    public String tagPager(ModelMap model,@PathVariable("tag") String tag, @PathVariable("pageNo") Integer pageNo) {
+    @RequestMapping(value = "/tag/{tag}/{pageNum}.html")
+    public String tagPager(ModelMap model,@PathVariable("tag") String tag, @PathVariable("pageNum") Integer pageNum) {
 
-
-        return "category";
+        return attrWithPage(model, tag, pageNum);
     }
 
+    public String attrWithPage(ModelMap model, String attrCode, Integer pageNum){
+        if(StringUtils.isNotBlank(attrCode)){
+            PostAttr attr = postService.attr(attrCode);
+
+            if(null != attr){
+                model.put("attrId", attr.getId());
+                model.put("attrName", attr.getAttrName());
+                model.put("attrType", attr.getAttrType());
+            }
+        }
+        model.put("pageNum", pageNum);
+
+        return "post/list";
+    }
 }

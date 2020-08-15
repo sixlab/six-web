@@ -19,7 +19,7 @@ minesite:
     username: root
     password: password
   login:
-    seconds: 3600
+    seconds: 36000
     sign: dksk24k30xk
   dingtalk:
     token: 1

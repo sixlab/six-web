@@ -79,4 +79,13 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+<!--  -->
+
+  <select id="selectPostAttr" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from post_attr_relate
+    where post_id = #{postId,jdbcType=INTEGER}
+  </select>
 </mapper>

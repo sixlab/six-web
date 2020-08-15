@@ -16,24 +16,25 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <mine.version>1.0.5-SNAPSHOT</mine.version>
+        <mine.site.version>1.0.7-SNAPSHOT</mine.site.version>
+        <mine.spider.version>1.0.5-SNAPSHOT</mine.spider.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>tech.minesoft.mine.site</groupId>
             <artifactId>minesite-core</artifactId>
-            <version>${mine.version}</version>
+            <version>${mine.site.version}</version>
         </dependency>
         <dependency>
             <groupId>tech.minesoft.mine.site</groupId>
             <artifactId>minesite-ext</artifactId>
-            <version>${mine.version}</version>
+            <version>${mine.site.version}</version>
         </dependency>
         <dependency>
             <groupId>tech.minesoft.mine.spider</groupId>
             <artifactId>spider-core</artifactId>
-            <version>${mine.version}</version>
+            <version>${mine.spider.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->

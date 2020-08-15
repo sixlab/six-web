@@ -1,0 +1,12 @@
+GET http://localhost:8888/ms/job/add
+Content-Type: application/x-www-form-urlencoded
+Cookie: MS_TOKEN=42827251-f21a-4b31-977f-d0e3f34a78c9
+
+###
+
+POST http://localhost:8888/ms/job/submit
+Content-Type: application/x-www-form-urlencoded
+Cookie: MS_TOKEN=42827251-f21a-4b31-977f-d0e3f34a78c9
+
+###
+

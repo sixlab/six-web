@@ -219,4 +219,44 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+<!--  -->
+
+
+  <select id="selectByType" resultType="cn.sixlab.six.web.vo.FullPostInfo">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from post_info
+    where post_status = 'open'
+        <if test=" postType != null and postType != '' ">
+            and post_type = #{postType,jdbcType=VARCHAR}
+        </if>
+    order by post_date desc
+  </select>
+
+  <select id="selectByAttr" resultType="cn.sixlab.six.web.vo.FullPostInfo">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from post_info
+    where post_status = 'open'
+        <if test=" postType != null and postType != '' ">
+            and post_type = #{postType,jdbcType=VARCHAR}
+        </if>
+        <if test=" attrIds != null and attrIds != '' ">
+          and id in (
+            select post_id
+            from post_attr_relate
+            where attr_id in (
+                ${attrIds}
+            )
+          )
+        </if>
+    order by post_date desc
+  </select>
+
+
 </mapper>

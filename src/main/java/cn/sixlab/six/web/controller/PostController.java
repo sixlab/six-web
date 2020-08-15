@@ -1,8 +1,8 @@
 package cn.sixlab.six.web.controller;
 
-import cn.sixlab.six.web.models.PostInfo;
 import cn.sixlab.six.web.service.PostService;
 import cn.sixlab.six.web.utils.Const;
+import cn.sixlab.six.web.vo.FullPostInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,7 +21,7 @@ public class PostController {
     @RequestMapping(value = "/{postId}.html")
     public String index(ModelMap model, @PathVariable("postId") String postId) {
 
-        PostInfo post = postService.getPost(postId,Const.POST_TYPE_ARCHIVE);
+        FullPostInfo post = postService.getPost(postId,Const.POST_TYPE_ARCHIVE);
 
         if(null==post){
             throw MineException.error(Err.ERR_NOT_EXIST, "文章不存在");
@@ -29,7 +29,7 @@ public class PostController {
 
         model.put("post", post);
 
-        return "post";
+        return "post/post";
     }
 
 }
