@@ -1,7 +1,6 @@
 package cn.sixlab.six.web.controller;
 
 import cn.sixlab.six.web.service.PostService;
-import cn.sixlab.six.web.utils.Const;
 import cn.sixlab.six.web.vo.FullPostInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +20,7 @@ public class PageController {
     @RequestMapping(value = "/{postId}.html")
     public String index(ModelMap model, @PathVariable("postId") String postId) {
 
-        FullPostInfo post = postService.getPost(postId,Const.POST_TYPE_PAGE);
+        FullPostInfo post = postService.getPost(postId);
 
         if(null==post){
             throw MineException.error(Err.ERR_NOT_EXIST, "页面不存在");

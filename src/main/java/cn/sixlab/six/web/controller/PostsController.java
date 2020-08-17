@@ -63,6 +63,7 @@ public class PostsController {
             }
         }
         model.put("pageNum", pageNum);
+        model.put("postType", "archive");
 
         return "post/list";
     }

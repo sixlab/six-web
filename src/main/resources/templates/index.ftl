@@ -1,5 +1,5 @@
-<@FrameBody title="${springMacroRequestContext.getMessage('page.title.index')}">
+<@FrameBody title="">
 
-    <@PostListWidget postType='archive' pageNum=1 pageSize=20 />
+    <@PostListWidget postType='news' pageNum=1 pageSize=20 />
 
 </@FrameBody>

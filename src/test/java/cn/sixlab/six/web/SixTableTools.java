@@ -29,7 +29,7 @@ public class SixTableTools {
     @Test
     void contextLoads() throws Exception {
         String[] tables = new String[]{
-                "post_attr",
+                "post_attr_relate",
         };
 
         // 获取到原始generatorConfig

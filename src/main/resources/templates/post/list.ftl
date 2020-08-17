@@ -1,5 +1,5 @@
-<@FrameBody title="">
+<@FrameBody title="${title!''}" keywords="${keywords!''}" description="${description!''}">
 
-    <@PostListWidget postType='archive' attrIds="${attrId!''}" pageNum="${pageNum}" pageSize=20 />
+    <@PostListWidget postType='${postType}' attrIds="${attrId!''}" pageNum="${pageNum}" pageSize=20 />
 
 </@FrameBody>

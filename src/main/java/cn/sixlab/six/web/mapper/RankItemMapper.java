@@ -31,4 +31,9 @@ public interface RankItemMapper {
     List<RankItem> selectByGroup(@Param("groupId") Integer groupId);
 
     void insertGroup(@Param("groupId") Integer groupId, @Param("dataList")List<RankItem> dataList);
+
+    @Select(" select * " +
+            " from rank_item " +
+            " order by item_rank ")
+    List<RankItem> selectAll();
 }

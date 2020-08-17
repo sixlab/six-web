@@ -6,9 +6,9 @@ import java.util.Date;
 public class PostAttrRelate implements Serializable {
     private Integer id;
 
-    private String postId;
+    private Integer postId;
 
-    private String attrId;
+    private Integer attrId;
 
     private Date createTime;
 
@@ -22,20 +22,20 @@ public class PostAttrRelate implements Serializable {
         this.id = id;
     }
 
-    public String getPostId() {
+    public Integer getPostId() {
         return postId;
     }
 
-    public void setPostId(String postId) {
-        this.postId = postId == null ? null : postId.trim();
+    public void setPostId(Integer postId) {
+        this.postId = postId;
     }
 
-    public String getAttrId() {
+    public Integer getAttrId() {
         return attrId;
     }
 
-    public void setAttrId(String attrId) {
-        this.attrId = attrId == null ? null : attrId.trim();
+    public void setAttrId(Integer attrId) {
+        this.attrId = attrId;
     }
 
     public Date getCreateTime() {

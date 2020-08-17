@@ -3,7 +3,7 @@
 
 <div id="content">
     <div class="data-op">
-        <a class="btn btn-outline-success my-2 my-sm-0" href="/notify/add">添加</a>
+        <a class="btn btn-outline-success my-2 my-sm-0" href="/six/notify/add">添加</a>
     </div>
 
     <table class="table table-striped data-table">
@@ -20,7 +20,7 @@
         <tbody>
         <#list dataList as item>
             <tr>
-                <td>${item_index}</td>
+                <td>${item_index+1}</td>
                 <td>${item.code!""}</td>
                 <td>
                     <#if item.type==0>
@@ -39,7 +39,7 @@
                 <td>${item.status!""}</td>
                 <td>
                     <button data-id="${item.id}" class="btn btn-outline-danger my-2 my-sm-0 delete">删除</button>
-                    <a target="_blank" class="btn btn-outline-info my-2 my-sm-0" href="/notify/edit/${item.id}">修改</a>
+                    <a target="_blank" class="btn btn-outline-info my-2 my-sm-0" href="/six/notify/edit/${item.id}">修改</a>
                 </td>
             </tr>
         </#list>
@@ -51,7 +51,7 @@
     $(function(){
         $(".delete").click(function () {
             $.ajax({
-                url:"/notify/delete/"+$(this).data("id"),
+                url:"/six/notify/delete/"+$(this).data("id"),
                 method:"post",
                 dataType:"json",
                 success:function(data){

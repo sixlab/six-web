@@ -1,6 +1,6 @@
 package cn.sixlab.six.web.schedule;
 
-import cn.sixlab.six.web.spider.BaiduRankSpiderTask;
+import cn.sixlab.six.web.spider.BaiduRankTask;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -11,7 +11,7 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 public class BaiduRankCrawJob extends QuartzJobBean {
 
     @Autowired
-    private BaiduRankSpiderTask task;
+    private BaiduRankTask task;
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {

@@ -29,6 +29,11 @@ public interface PostInfoMapper {
             " limit 1 ")
     PostInfo selectAlias(@Param("aliasName") String aliasName);
 
+    @Select(" select * " +
+            " from post_info " +
+            " order by post_date desc ")
+    List<PostInfo> selectAll();
+
     List<FullPostInfo> selectByType(@Param("postType") String postType);
 
     List<FullPostInfo> selectByAttr(@Param("postType") String postType,

@@ -13,7 +13,7 @@ logging:
 
 minesite:
   version:
-    app: 1
+    app: 2
   druid:
     key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJbxUycCJKNFJjcGtb+2uzlqzVpZyXGbS7atTSFHVVVJWmUf8F9rakYg0Y2iQhNgVC1k8OE+ZTeU1TfepLsFpvkCAwEAAQ==
     username: root

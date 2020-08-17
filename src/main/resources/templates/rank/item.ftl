@@ -18,8 +18,10 @@
             <th scope="row">${item.itemRank}</th>
             <td>${item.itemName}</td>
             <td>
+                <a target="_blank" href="/rank/news/${item.itemName}.html">资讯</a>
+
                 <a target="_blank" href="https://baike.baidu.com/item/${item.itemName}">简介</a>
-                <a target="_blank" href="http://news.baidu.com/ns?word=${item.itemName}">新闻</a>
+                <a target="_blank" href="http://news.baidu.com/ns?word=${item.itemName}">百度新闻</a>
                 <a target="_blank" href="https://image.baidu.com/search/index?tn=baiduimage&word=${item.itemName}">图片</a>
             </td>
             <td>

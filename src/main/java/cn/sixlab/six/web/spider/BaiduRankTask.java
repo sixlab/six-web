@@ -11,6 +11,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import tech.minesoft.mine.site.core.queue.QueueTemplate;
 import tech.minesoft.mine.site.core.utils.HttpUtils;
 import tech.minesoft.mine.site.core.vo.ResultJson;
 import tech.minesoft.mine.spider.core.Spider;
@@ -26,15 +27,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class BaiduRankSpiderTask implements SpiderGenerator, SpiderExtractor, SpiderSaver {
+public class BaiduRankTask implements SpiderGenerator, SpiderExtractor, SpiderSaver {
     private static String KEY_RESULT = "result";
     private static String KEY_GROUP = "groupId";
 
     @Autowired
-    private RankGroupMapper groupMapper ;
+    private RankGroupMapper groupMapper;
 
     @Autowired
     private RankItemMapper itemMapper;
+
+    @Autowired
+    private QueueTemplate template;
 
     public final Spider spider = init();
 
@@ -49,7 +53,6 @@ public class BaiduRankSpiderTask implements SpiderGenerator, SpiderExtractor, Sp
 
     @Override
     public List<SpiderRequest> generate(String spiderName) {
-
         List<RankGroup> groupList = groupMapper.selectItems();
 
         List<SpiderRequest> requestList = new ArrayList<>();
@@ -68,7 +71,6 @@ public class BaiduRankSpiderTask implements SpiderGenerator, SpiderExtractor, Sp
 
     @Override
     public Content extract(SpiderRequest request, SpiderResponse response) {
-        Element tempElement = null;
         try {
             ResultJson json = HttpUtils.responseHandler(response.getResponse(), Charset.forName("gb2312"));
 
@@ -81,7 +83,6 @@ public class BaiduRankSpiderTask implements SpiderGenerator, SpiderExtractor, Sp
 
                 boolean first = true;
                 for (Element element : elements) {
-                    tempElement = element;
                     if(first){
                         first = false;
                         continue;
@@ -116,6 +117,8 @@ public class BaiduRankSpiderTask implements SpiderGenerator, SpiderExtractor, Sp
                     item.setItemChange(change);
 
                     dataList.add(item);
+
+                    template.send("newsConsumer", item.getItemName());
                 }
 
                 Content content = new Content(request);
@@ -138,7 +141,7 @@ public class BaiduRankSpiderTask implements SpiderGenerator, SpiderExtractor, Sp
             List<RankItem> dataList = (List<RankItem>) result;
 
             itemMapper.deleteGroup(groupId);
-            itemMapper.insertGroup(groupId,dataList);
+            itemMapper.insertGroup(groupId, dataList);
         }
     }
 }

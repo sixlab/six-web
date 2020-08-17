@@ -1,5 +1,7 @@
 <#-- @ftlvariable name="post" type="cn.sixlab.six.web.vo.FullPostInfo" -->
-<@FrameBody title="${post.postTitle!''}">
+<@FrameBody title="${post.postTitle!''}" keywords="${post.postTitle!''}" description="${post.postSummary!''}  ">
+
+    <link rel="stylesheet" href="/static/plugins/wangeditor/wangEditor.min.css">
 
 <div>
     <h1>${post.postTitle}</h1>

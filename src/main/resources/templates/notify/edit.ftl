@@ -1,5 +1,5 @@
 <#include "/ms/frame.ftl"/>
-<#assign title = (job??)?string('修改','新增')+'提醒配置' />
+<#assign title = (data??)?string('修改','新增')+'提醒配置' />
 <@AdminFrame title="${title}">
 
 <div id="content">
@@ -22,7 +22,7 @@
             <input type="text" class="form-control" name="status" id="status" value="${(data.status)!''}">
         </div>
         <div class="form-group" id="btnGroup">
-            <a class="btn btn-secondary" href="/notify/list">返回</a>
+            <a class="btn btn-secondary" href="/six/notify/list">返回</a>
             <button type="submit" class="btn btn-primary" id="editSubmit">提交</button>
         </div>
     </form>
@@ -32,7 +32,7 @@
     $(function(){
         $("#editSubmit").click(function () {
             $.ajax({
-                url:"/notify/submit",
+                url:"/six/notify/submit",
                 method:"post",
                 dataType:"json",
                 data:$("#editFrm").serialize(),

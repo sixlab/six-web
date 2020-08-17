@@ -12,7 +12,7 @@ import tech.minesoft.mine.site.core.vo.ResultJson;
 import java.util.List;
 
 @Controller
-@RequestMapping("/notify")
+@RequestMapping("/six/notify")
 public class NotifyController {
 
     @Autowired

@@ -3,8 +3,8 @@
 <mapper namespace="cn.sixlab.six.web.mapper.PostAttrRelateMapper">
   <resultMap id="BaseResultMap" type="cn.sixlab.six.web.models.PostAttrRelate">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="post_id" jdbcType="VARCHAR" property="postId" />
-    <result column="attr_id" jdbcType="VARCHAR" property="attrId" />
+    <result column="post_id" jdbcType="INTEGER" property="postId" />
+    <result column="attr_id" jdbcType="INTEGER" property="attrId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -26,7 +26,7 @@
     </selectKey>
     insert into post_attr_relate (post_id, attr_id, create_time
       )
-    values (#{postId,jdbcType=VARCHAR}, #{attrId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+    values (#{postId,jdbcType=INTEGER}, #{attrId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.sixlab.six.web.models.PostAttrRelate">
@@ -47,10 +47,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="postId != null">
-        #{postId,jdbcType=VARCHAR},
+        #{postId,jdbcType=INTEGER},
       </if>
       <if test="attrId != null">
-        #{attrId,jdbcType=VARCHAR},
+        #{attrId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -61,10 +61,10 @@
     update post_attr_relate
     <set>
       <if test="postId != null">
-        post_id = #{postId,jdbcType=VARCHAR},
+        post_id = #{postId,jdbcType=INTEGER},
       </if>
       <if test="attrId != null">
-        attr_id = #{attrId,jdbcType=VARCHAR},
+        attr_id = #{attrId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -74,8 +74,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.sixlab.six.web.models.PostAttrRelate">
     update post_attr_relate
-    set post_id = #{postId,jdbcType=VARCHAR},
-      attr_id = #{attrId,jdbcType=VARCHAR},
+    set post_id = #{postId,jdbcType=INTEGER},
+      attr_id = #{attrId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

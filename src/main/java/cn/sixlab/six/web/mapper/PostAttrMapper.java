@@ -28,4 +28,17 @@ public interface PostAttrMapper {
             " or id = #{attrCode,jdbcType=VARCHAR} " +
             " limit 1 ")
     PostAttr selectByAttr(@Param("attrCode") String attrCode);
+
+    @Select(" select * " +
+            " from post_attr " +
+            " where attr_type = 'tag' " +
+            " and attr_name = #{attrName,jdbcType=VARCHAR} " +
+            " limit 1 ")
+    PostAttr selectTag(@Param("attrName") String attrName);
+
+    @Select(" select * " +
+            " from post_attr " +
+            " where attr_type = #{attrType,jdbcType=VARCHAR} " +
+            " and attr_name in ${tagNames,jdbcType=VARCHAR} ")
+    List<PostAttr> selectAttrs(@Param("attrType") String attrType, @Param("tagNames") String tagNames);
 }

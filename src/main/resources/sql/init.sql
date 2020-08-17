@@ -23,8 +23,8 @@ create table if not exists post_attr_relate
 (
     id int auto_increment
         primary key,
-    post_id varchar(20) null,
-    attr_id varchar(20) null,
+	post_id int null,
+	attr_id int null,
     create_time datetime null
 )
     comment 'post 和 属性的关联关系';
@@ -42,7 +42,7 @@ create table if not exists post_info
 (
     id int auto_increment
         primary key,
-    alias_name varchar(20) null,
+    alias_name varchar(50) null,
     author_id int null,
     author_name varchar(50) null,
     post_type varchar(20) null,
@@ -256,3 +256,11 @@ VALUES
 (108, 53, 'item', null, '全部动漫', 2, 141, 'http://top.baidu.com/buzz?b=23');
 
 update rank_group set create_time = now() where create_time is null;
+
+INSERT INTO ms_menu
+(menu_position, menu_level, menu_name, menu_path, menu_summary, menu_order)
+VALUES
+('admin', 1, '应用', '/', '应用', 6000),
+('admin', 2, '文章', '/six/post/list', '文章', 6010),
+('admin', 2, '提醒项', '/notify/list', '提醒项', 6100),
+('admin', 2, '测试', '/test/list', '测试', 6990);
