@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <mine.site.version>1.0.7-SNAPSHOT</mine.site.version>
+        <mine.site.version>1.0.8-SNAPSHOT</mine.site.version>
         <mine.spider.version>1.0.5-SNAPSHOT</mine.spider.version>
     </properties>
 

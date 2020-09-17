@@ -4,10 +4,7 @@ import cn.sixlab.six.web.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import tech.minesoft.mine.site.core.vo.ResultJson;
 
 @Controller
@@ -17,16 +14,18 @@ public class DataController {
     @Autowired
     private DataService dataService;
 
-    @RequestMapping(value = "/list")
-    public String list(ModelMap model) {
+    @RequestMapping(value = "/gold")
+    public String gold(ModelMap model) {
 
-        return "data/list";
+        return "data/gold";
     }
 
     @ResponseBody
-    @PostMapping(value = "/delete/{id}")
-    public ResultJson delete(@PathVariable Integer id) {
-
-        return ResultJson.success();
+    @PostMapping(value = "/gold/data/{type}")
+    public ResultJson delete(@PathVariable Integer type, @RequestParam(defaultValue = "10") Integer times) {
+        // 11 Calendar.HOUR_OF_DAY
+        // 5  Calendar.DAY_OF_MONTH
+        // 2  Calendar.MONTH
+        return ResultJson.successData(dataService.goldData(type, times));
     }
 }

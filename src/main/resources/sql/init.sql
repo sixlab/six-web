@@ -131,6 +131,12 @@ create table if not exists six_data
 create index six_data_code_index
     on six_data (code);
 
+create index six_data_code_create_time_data_index
+    on six_data (code, create_time, data);
+
+create index six_data_code_create_time_index
+    on six_data (code, create_time);
+
 create table if not exists six_notify_config
 (
     id int auto_increment

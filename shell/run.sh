@@ -2,7 +2,7 @@
 
 source /etc/profile
 
-cmd=$(ps aux | grep six-web.jar | grep java | awk '{print $2}')
+cmd=$(ps aux | grep six-web-run.jar | grep java | awk '{print $2}')
 
 echo -e "PID: \n\033[31m\033[05m$cmd\033[0m"
 
@@ -14,4 +14,5 @@ for id in ${cmd}; do
 done
 echo 'finish kill'
 
-nohup java -jar six-web.jar --spring.profiles.active=prod >nohup.out 2>&1 &
+cp six-web.jar six-web-run.jar
+nohup java -Duser.language=zh -Duser.country=CN -Duser.timezone=Asia/Shanghai -jar six-web-run.jar --spring.profiles.active=prod >nohup.out 2>&1 &
