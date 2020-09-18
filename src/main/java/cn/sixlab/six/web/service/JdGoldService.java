@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tech.minesoft.mine.site.core.utils.HttpUtils;
 import tech.minesoft.mine.site.core.utils.JsonUtils;
 import tech.minesoft.mine.site.core.vo.ResultJson;
-import tech.minesoft.mine.site.ext.service.DingTalkService;
+import tech.minesoft.mine.site.ext.service.FeiShuService;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -33,7 +33,7 @@ public class JdGoldService {
     private SixNotifyConfigMapper notifyConfigDao;
 
     @Autowired
-    private DingTalkService dingTalkService;
+    private FeiShuService feiShuService;
 
     public void daily() {
         String apiUrl = "https://ms.jr.jd.com/gw/generic/hj/h5/m/latestPrice";
@@ -54,13 +54,12 @@ public class JdGoldService {
             BigDecimal price = new BigDecimal(MapUtils.getString(datas, "price"));
 
             StringBuilder builder = new StringBuilder();
-            builder.append("\n价格：");
             builder.append(price.toPlainString());
-            builder.append("\n日期：");
+            builder.append("\n---------------\n日期：");
             builder.append(timeStr);
-            builder.append("\n访问：https://datastrend.com/api/gold/index\n");
 
-            dingTalkService.sendText(builder.toString());
+            // 每日提醒
+            feiShuService.sendText(builder.toString());
         }
     }
 
@@ -100,9 +99,9 @@ public class JdGoldService {
                 builder.append(timeStr);
                 builder.append("\n价格：");
                 builder.append(price.toPlainString());
-                builder.append("\n访问：https://datastrend.com/api/gold/index\n");
 
-                dingTalkService.sendText(builder.toString());
+                // 开始监控
+                feiShuService.sendText(builder.toString());
             } else {
                 List<SixNotifyConfig> configList = notifyConfigDao.queryAllByCode(CODE);
 
@@ -110,13 +109,13 @@ public class JdGoldService {
                     for (SixNotifyConfig config : configList) {
                         if (warning(price, lastData.getData(), config)) {
                             StringBuilder builder = new StringBuilder();
-                            builder.append("\n价格：");
                             builder.append(price.toPlainString());
+                            builder.append("\n---------------\n上次价格：");
+                            builder.append(lastData.getData().toPlainString());
                             builder.append("\n预警时间：");
                             builder.append(timeStr);
-                            builder.append("\n访问：https://datastrend.com/api/gold/index\n");
 
-                            dingTalkService.sendText(builder.toString());
+                            feiShuService.sendText(builder.toString());
 
                             break;
                         }
